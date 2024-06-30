@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-deployment
+spec:
+  replicas: {{ .Values.nodejs.replicaCount }}
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+        - name: nodejs
+          image: "{{ .Values.nodejs.image.repository }}:{{ .Values.nodejs.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.nodejs.service.port }}
+          env:
+            - name: PORT
+              value: "{{ .Values.nodejs.service.port }}"
+            - name: MONGODB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: nodejs-config
+                  key: MONGODB_URL
+          volumeMounts:
+            - name: app-volume
+              mountPath: /usr/src/app
+      volumes:
+        - name: app-volume
+          emptyDir: {}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+spec:
+  replicas: {{ .Values.mongodb.replicaCount }}
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: "{{ .Values.mongodb.image.repository }}:{{ .Values.mongodb.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.mongodb.service.port }}
+          # volumeMounts:
+          #   - name: mongodb-persistent-storage
+          #     mountPath: /data/db
+      # volumes:
+      #   - name: mongodb-persistent-storage
+      #     persistentVolumeClaim:
+      #       claimName: mongodb-pvc
