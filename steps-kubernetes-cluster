@@ -6,4 +6,5 @@ configure the saml2aws configure command by running and sharing the secret key a
 now addded the following script to run the main.tf file
 post adding then terraform init , then terraform plan and terraform apply 
 post applying the changes the script runs and creates the infrastructure in AWS under EKS
-Verify the Cluster: Once the Terraform apply is complete, you can verify the cluster and deployed resources using the kubectl command-line tool. Make sure the Kubernetes resources are created as expected
+Verify the Cluster: Once the Terraform apply is complete, you can verify the cluster and deployed resources using the kubectl command-line tool.
+Make sure the Kubernetes resources are created as expected
