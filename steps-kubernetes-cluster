@@ -1,0 +1,9 @@
+Install Terraform: 
+Terraform is installed in the  local machine. downloaded Terraform from the official website
+Install visual studio code from the official site
+set the environment variables and create a working directory
+configure the saml2aws configure command by running and sharing the secret key and access key of aws.
+now addded the following script to run the main.tf file
+post adding then terraform init , then terraform plan and terraform apply 
+post applying the changes the script runs and creates the infrastructure in AWS under EKS
+Verify the Cluster: Once the Terraform apply is complete, you can verify the cluster and deployed resources using the kubectl command-line tool. Make sure the Kubernetes resources are created as expected
