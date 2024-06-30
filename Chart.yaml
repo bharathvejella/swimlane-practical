@@ -1,4 +1,4 @@
-apiVersion: v2
+apiVersion: v3
 name: my-app
 description: A Helm chart for deploying a NodeJS application and MongoDB
 version: 0.1.0
